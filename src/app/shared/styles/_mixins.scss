@@ -1,0 +1,25 @@
+@mixin animationMixin ($animation, $duration, $delay, $fill, $steps) {
+    -webkit-animation-name: $animation;
+    -webkit-animation-duration: $duration;
+    -webkit-animation-delay: $delay;
+    -webkit-animation-fill-mode: $fill;
+    -webkit-animation-iteration-count: $iteration;
+
+    -moz-animation-name: $animation;
+    -moz-animation-delay: $delay;
+    -moz-animation-duration: $duration;
+    -moz-animation-fill-mode: $fill;
+    -moz-animation-iteration-count: $iteration;
+
+    -o-animation-delay: $delay;
+    -o-animation-duration: $duration;
+    -o-animation-name: $animation;
+    -o-animation-fill-mode: $fill;
+    -o-animation-iteration-count: $iteration;
+
+    animation-name: $animation;
+    animation-delay: $delay;
+    animation-duration: $duration;
+    animation-fill-mode: $fill;
+    animation-iteration-count: $iteration;
+}

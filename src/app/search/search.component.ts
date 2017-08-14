@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { CoreService } from '../core/services/core.service';
 import { AuthService } from '../core/services/auth.service';
 
@@ -10,6 +10,8 @@ import { AuthService } from '../core/services/auth.service';
 export class SearchComponent implements OnInit {
 
   @Output() getList = new EventEmitter();
+  @Input() inputVal = '';
+
   constructor(
     private coreService: CoreService,
     private authService: AuthService
