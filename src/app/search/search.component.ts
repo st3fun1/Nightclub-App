@@ -1,8 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CoreService } from '../core/services/core.service';
 import { AuthService } from '../core/services/auth.service';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
 
 @Component({
   selector: 'app-search',
@@ -20,35 +18,26 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
   }
 
-  submit(searchVal) {
-    console.log("searchVal: ", searchVal);
-    if (searchVal) {
+  submit(searchVal: string, valid: boolean): void {
+    if (searchVal && valid) {
       if (this.authService.authenticated) {
-        this.coreService.privateGetClubs(searchVal)
-        .debounceTime(1000)
-        .distinctUntilChanged()
-        .subscribe(
-          (data) => {
-            if (typeof data.places !== 'string') {
-              this.getList.emit(data.places);
-            }
-          },
-          (error) => {
-             this.getList.emit({'error': true});
-          }
-        )
+        this.getListByReqType('private', searchVal);
       } else {
-        this.coreService.publicGetClubs(searchVal).subscribe(
-          (data) => {
-            if (typeof data.places !== 'string') {
-              this.getList.emit(data.places);
-            }
-          },
-          (error) => {
-             this.getList.emit({'error': true});
-          }
-        );
+        this.getListByReqType('public', searchVal);
       }
     }
+  }
+
+  getListByReqType(type: string = 'public', searchVal: string):void {
+      this.coreService.callService(type, searchVal, 
+          (data) => {
+            if (typeof data.places !== 'string') {
+                this.getList.emit(data.places);
+            }
+          },
+          (error) => {
+            this.getList.emit({'error': true});
+          }
+        );
   }
 }

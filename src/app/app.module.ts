@@ -18,6 +18,7 @@ import { LoginGuard } from './guards/login.guard';
 import { ShowTextPipe } from './shared/pipes/showText.pipe';
 import { authHttpServiceFactory } from './core/services/authHttpServiceFactory';
 import { TextValidator} from './shared/directives/textValidator.directive';
+import { IpService } from './core/services/ip.service';
 
 @NgModule({
   declarations: [
@@ -34,11 +35,15 @@ import { TextValidator} from './shared/directives/textValidator.directive';
     FormsModule,
     CoreModule
   ],
-  providers: [AuthService,{
-    provide: AuthHttp,
-    useFactory: authHttpServiceFactory,
-    deps: [Http, RequestOptions]
-  }],
+  providers: [
+    AuthService,
+    {
+      provide: AuthHttp,
+      useFactory: authHttpServiceFactory,
+      deps: [Http, RequestOptions]
+    },
+    IpService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
