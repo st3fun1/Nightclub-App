@@ -17,14 +17,16 @@ import { LoginResolve } from './resolvers/login.resolver';
 import { LoginGuard } from './guards/login.guard';
 import { ShowTextPipe } from './shared/pipes/showText.pipe';
 import { authHttpServiceFactory } from './core/services/authHttpServiceFactory';
+import { TextValidator} from './shared/directives/textValidator.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    SearchComponent,
     CallbackComponent,
-    ShowTextPipe
+    ShowTextPipe,
+    TextValidator,
+    SearchComponent
   ],
   imports: [
     RouterModule.forRoot(ROUTES),

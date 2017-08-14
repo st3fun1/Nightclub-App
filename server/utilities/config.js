@@ -6,7 +6,7 @@ module.exports = class Config {
     }
     // TODO: move key to envinronment variable
     get googlePlacesAPIKey() {
-        //return 'AIzaSyCEgPg35YC5JpCmQyP9hFrJHIRUpTFe5Yk';
-        return 'AIzaSyBDNQbCndagB8NTJDzofibKXYEmvzceyK0';
+        return 'AIzaSyCEgPg35YC5JpCmQyP9hFrJHIRUpTFe5Yk';
+        // return 'AIzaSyBDNQbCndagB8NTJDzofibKXYEmvzceyK0';
     }
 };

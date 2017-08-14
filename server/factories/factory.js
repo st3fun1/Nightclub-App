@@ -1,4 +1,4 @@
-const GooglePlaces = require('../controllers/google-places');
+const GooglePlaces = require('../apis/google-places');
 const Config = require('../utilities/config');
 const Utilities = require('../utilities/utilities');
 
@@ -7,7 +7,7 @@ class MainFactory {
     constructor() {
         this.Config = new Config();
         this.Utilities = new Utilities();
-        this.GooglePlaces = new GooglePlaces(this.Config);
+        this.GooglePlaces = new GooglePlaces(new Config());
     }
 
 }

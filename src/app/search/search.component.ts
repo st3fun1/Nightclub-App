@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CoreService } from '../core/services/core.service';
 import { AuthService } from '../core/services/auth.service';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 
 @Component({
   selector: 'app-search',
@@ -19,9 +21,13 @@ export class SearchComponent implements OnInit {
   }
 
   submit(searchVal) {
+    console.log("searchVal: ", searchVal);
     if (searchVal) {
       if (this.authService.authenticated) {
-        this.coreService.privateGetClubs(searchVal).subscribe(
+        this.coreService.privateGetClubs(searchVal)
+        .debounceTime(1000)
+        .distinctUntilChanged()
+        .subscribe(
           (data) => {
             if (typeof data.places !== 'string') {
               this.getList.emit(data.places);

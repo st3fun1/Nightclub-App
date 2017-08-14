@@ -20,7 +20,6 @@ export class AppComponent {
     private authHttp: AuthHttp) {}
 
   getList(res) {
-    console.log("RES: ", res);
     if (res && res.length) {
       this.places = res;
     }
