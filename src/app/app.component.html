@@ -1,0 +1,28 @@
+<div class="container-fluid main">
+    <div class="row justify-content-center">
+        <h1 class="col-6 text-center">Plans tonight?</h1>
+        <!-- <h2 class="col-6 text-center">Three icons</h2> -->
+        <!-- <p class="col-4 text-center">
+            See which bars are hoppin'tonight and RSVP ahead of time!
+            Remember: take a cab and drink responsibly
+        </p> -->
+    </div>
+</div>
+<app-search (getList)="getList($event)">
+
+</app-search>
+<ul *ngIf="places && places.length">
+    <li *ngFor="let place of places">
+        {{place.name}} | Going: {{place.peopleGoing}} {{ '|' | showText : authenticated}}
+        <button type="button" *ngIf="authenticated" (click)="changeState(place)">
+            {{ place.currentUserGoing ? 'Going' : 'Not going'}}
+        </button>
+    </li>
+</ul>
+
+
+<button *ngIf="!authenticated; else logoutBtn" type="button" (click)="login($event)">Login</button>
+<ng-template #logoutBtn>
+    <button  type="button" (click)="logout($event)">Logout</button>
+</ng-template>
+<router-outlet></router-outlet>
