@@ -4,6 +4,8 @@ import { AuthService } from './core/services/auth.service';
 import { CoreService } from './core/services/core.service';
 import { AuthHttp } from 'angular2-jwt';
 
+import { IpService } from './core/services/ip.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,12 +14,14 @@ import { AuthHttp } from 'angular2-jwt';
 export class AppComponent {
   places = [];
   authenticated = this.authService.authenticated;
+  locationData = null;
 
   constructor(
     private coreService: CoreService, 
     public authService: AuthService, 
     private route: ActivatedRoute, 
-    private authHttp: AuthHttp) {}
+    private authHttp: AuthHttp,
+    private ipService: IpService) {}
 
   getList(res) {
     if (res && res.length) {
@@ -29,10 +33,26 @@ export class AppComponent {
     this.authService.loggedIn$.subscribe( (data) => {
       if (data) {
         this.authenticated = true;
+        // get the list of clubs for your area
+        this.getLocationDetails();
       } else {
         this.authenticated = false;
       }
     });
+    if (!this.authenticated) {
+       this.getLocationDetails();
+    }
+  }
+
+  getLocationDetails() {
+    this.coreService.getListForCurrentLocation(
+        (data, cityName) => {
+          console.log("data: ", data);
+        },
+        (error) => {
+          console.error("error: ", error);
+        }
+    );
   }
 
   login(event) {
