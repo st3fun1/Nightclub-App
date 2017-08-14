@@ -20,7 +20,6 @@
     </li>
 </ul>
 
-
 <button *ngIf="!authenticated; else logoutBtn" type="button" (click)="login($event)">Login</button>
 <ng-template #logoutBtn>
     <button  type="button" (click)="logout($event)">Logout</button>

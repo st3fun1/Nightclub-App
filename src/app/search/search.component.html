@@ -1,8 +1,7 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
     <form #form="ngForm" novalidate>
-        <input type="text" name="searchVal" #searchValVar="ngModel" [(ngModel)]="searchVal"/>
-        <button type="submit" (click)="submit(searchValVar.value)">Search</button>
+        <input (keyup)="submit(searchValVar.value)" validateText type="text" name="searchVal" #searchValVar="ngModel" [(ngModel)]="searchVal"/>
     </form>
   </div>
 </div>

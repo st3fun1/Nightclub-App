@@ -12,10 +12,10 @@ import 'rxjs/add/observable/throw'
 export class CoreService {
 
   private googlePlacesAPIkey = 'AIzaSyCEgPg35YC5JpCmQyP9hFrJHIRUpTFe5Yk';
-  private publicGetClubsURL = `${GlobalConfig.serverURL}/public/nightclubs`;
-  private privateGetClubsURL =  `${GlobalConfig.serverURL}/private/nightclubs`;
-  private subscribeToClubURL = `${GlobalConfig.serverURL}/private/nightclubs/subscribe`;
-  private unsubscribeFromClubURL = `${GlobalConfig.serverURL}/private/nightclubs/unsubscribe`;
+  private publicGetClubsURL = `${GlobalConfig.serverURL}/api/public/nightclubs`;
+  private privateGetClubsURL =  `${GlobalConfig.serverURL}/api/private/nightclubs`;
+  private subscribeToClubURL = `${GlobalConfig.serverURL}/api/private/nightclubs/subscribe`;
+  private unsubscribeFromClubURL = `${GlobalConfig.serverURL}/api/private/nightclubs/unsubscribe`;
 
   constructor(private http: Http, private authHttp: AuthHttp) { }
 
