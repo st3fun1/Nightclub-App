@@ -1,14 +1,33 @@
 <div class="container-fluid main">
     <div class="row justify-content-center">
-        <h1 class="col-6 text-center">Plans tonight?</h1>
-        <!-- <h2 class="col-6 text-center">Three icons</h2> -->
-        <!-- <p class="col-4 text-center">
+        <h1 class="col-6 text-center main-header">To get drunk or to get drunker?</h1>
+    </div>
+    <div class="row justify-content-center">
+        <h2 class="col-6 text-center ">
+             <div class="row justify-content-center">
+                 <i fa class="col-1"
+                    [name]="'glass'"
+                    [size]="1">
+                 </i>
+                 <i fa class="col-1"
+                    [name]="'users'"
+                    [size]="1">
+                 </i>
+                 <i fa class="col-1"
+                    [name]="'smile-o'"
+                    [size]="1">
+                 </i>
+             </div>
+         </h2>
+    </div>
+    <div class="row justify-content-center">
+        <p class="col-4 text-center description">
             See which bars are hoppin'tonight and RSVP ahead of time!
             Remember: take a cab and drink responsibly
-        </p> -->
+        </p>
     </div>
 </div>
-<app-search (getList)="getList($event)">
+<app-search (getList)="getList($event)" [inputVal]="defaultInputVal">
 
 </app-search>
 <ul *ngIf="places && places.length">

@@ -9,13 +9,14 @@ import { IpService } from './core/services/ip.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
   places = [];
   authenticated = this.authService.authenticated;
   locationData = null;
-
+  defaultInputVal = '';
   constructor(
     private coreService: CoreService, 
     public authService: AuthService, 
@@ -44,10 +45,14 @@ export class AppComponent {
     }
   }
 
+  // TODO: error handling + ui notifications
   getLocationDetails() {
     this.coreService.getListForCurrentLocation(
         (data, cityName) => {
-          console.log("data: ", data);
+          if (data.length) {
+            this.places = data;
+            this.defaultInputVal = cityName;
+          }
         },
         (error) => {
           console.error("error: ", error);
@@ -71,13 +76,7 @@ export class AppComponent {
         this.coreService.subscribeToClub(place).subscribe( 
           (data) => {
               if (data.message) {
-                  this.places = this.places.map( (el) => {
-                    if (place.name === el.name) {
-                      el.currentUserGoing = true;
-                      el.peopleGoing += 1;
-                    }
-                    return el;
-                  });
+                  this.updateList(place);
               }
           },
           (error) => {
@@ -88,13 +87,7 @@ export class AppComponent {
         this.coreService.unsubscribeFromClub(place).subscribe( 
           (data) => {
             if (data.message) {
-              this.places = this.places.map( (el) => {
-                if (place.name === el.name) {
-                  el.currentUserGoing = false;
-                  el.peopleGoing -= 1;
-                }
-                return el;
-              });
+              this.updateList(place, true);
             }
           },
           (error) => {
@@ -102,5 +95,20 @@ export class AppComponent {
           }
         );
       }
+  }
+
+  updateList(club, unsubscribe = false):void {
+      this.places = this.places.map( (el) => {
+          if (club.name === el.name) {
+            if (!unsubscribe) {
+                el.currentUserGoing = true;
+                el.peopleGoing += 1;
+            } else {
+                el.currentUserGoing = false;
+                el.peopleGoing -= 1;
+            }
+          }
+          return el;
+      });
   }
 }

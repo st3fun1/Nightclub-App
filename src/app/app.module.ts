@@ -6,6 +6,7 @@ import { CoreModule } from './core/core.module';
 import { Http, RequestOptions } from '@angular/http';
 
 import { AuthHttp} from 'angular2-jwt';
+import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome'
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -33,7 +34,8 @@ import { IpService } from './core/services/ip.service';
     RouterModule.forRoot(ROUTES),
     BrowserModule,
     FormsModule,
-    CoreModule
+    CoreModule,
+    Angular2FontawesomeModule
   ],
   providers: [
     AuthService,

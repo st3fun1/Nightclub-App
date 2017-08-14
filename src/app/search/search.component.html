@@ -1,7 +1,8 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
     <form #form="ngForm" novalidate>
-        <input validateText type="text" name="searchVal" #searchValVar="ngModel" [(ngModel)]="searchVal"/>
+        <input [value]="inputVal" validateText 
+            type="text" name="searchVal" #searchValVar="ngModel" [(ngModel)]="searchVal"/>
         <small *ngIf="searchValVar.errors && searchValVar.errors.invalidText">Invalid text</small>
     </form>
     <button type="button" (click)="submit(searchValVar.value, searchValVar.valid)">Search</button>
