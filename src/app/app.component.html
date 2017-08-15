@@ -1,19 +1,27 @@
+<header class="container-fluid">
+    <div class="row justify-content-end">
+        <button class="col-1 btn btn-primary" *ngIf="!authenticated; else logoutBtn" type="button" (click)="login($event)">Login</button>
+        <ng-template #logoutBtn>
+            <button  class="col-1 btn btn-primary" type="button" (click)="logout($event)">Logout</button>
+        </ng-template>
+    </div>
+</header>
 <div class="container-fluid main">
     <div class="row justify-content-center">
-        <h1 class="col-6 text-center main-header">To get drunk or to get drunker?</h1>
+        <h1 class="col-12 col-md-6 text-center main-header">To get drunk or to get drunker?</h1>
     </div>
     <div class="row justify-content-center">
-        <h2 class="col-6 text-center ">
+        <h2 class="col-10 col-md-8">
              <div class="row justify-content-center">
-                 <i fa class="col-1"
+                 <i fa class="col-3 col-md-1 col-xl-1"
                     [name]="'glass'"
                     [size]="1">
                  </i>
-                 <i fa class="col-1"
+                 <i fa class="col-3 col-md-1 col-xl-1"
                     [name]="'users'"
                     [size]="1">
                  </i>
-                 <i fa class="col-1"
+                 <i fa class="col-3 col-md-1 col-xl-1"
                     [name]="'smile-o'"
                     [size]="1">
                  </i>
@@ -21,7 +29,7 @@
          </h2>
     </div>
     <div class="row justify-content-center">
-        <p class="col-4 text-center description">
+        <p class="col-8 col-md-4 text-center description">
             See which bars are hoppin'tonight and RSVP ahead of time!
             Remember: take a cab and drink responsibly
         </p>
@@ -38,9 +46,4 @@
         </button>
     </li>
 </ul>
-
-<button *ngIf="!authenticated; else logoutBtn" type="button" (click)="login($event)">Login</button>
-<ng-template #logoutBtn>
-    <button  type="button" (click)="logout($event)">Logout</button>
-</ng-template>
 <router-outlet></router-outlet>

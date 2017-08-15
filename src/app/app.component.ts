@@ -49,8 +49,8 @@ export class AppComponent {
   getLocationDetails() {
     this.coreService.getListForCurrentLocation(
         (data, cityName) => {
-          if (data.length) {
-            this.places = data;
+          if (data.places.length) {
+            this.places = data.places;
             this.defaultInputVal = cityName;
           }
         },

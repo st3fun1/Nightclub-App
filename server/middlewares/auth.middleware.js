@@ -13,7 +13,6 @@ module.exports = function(req, res, next) {
         let decodedAuth = jwtDecode(req.headers.authorization);
         req.privateReq = true;
         req.decodedAuth = decodedAuth;
-        console.log("req: ", req.privateReq, req.decodedAuth);
     }
     next();
 };
