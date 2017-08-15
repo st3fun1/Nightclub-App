@@ -16,7 +16,6 @@ export class TextValidator implements Validator {
 
     validate(c: AbstractControl) {
         let valid = /^[a-z]+$/i.test(c.value);
-        console.log("valid: ", valid);
         if (valid) {
             return null;
         }

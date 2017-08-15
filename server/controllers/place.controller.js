@@ -72,31 +72,25 @@ exports.subscribeToClub = function(req, res) {
             if (err) {
                 return res.json({error: 'Update failed'})
             } else {
-                let peopleGoing = doc.peopleGoing;
-                if (peopleGoing.length) {
-                    return res.json({message: 'Succesfully subscribed!'});
-                } else {
-                    Place.findByIdAndUpdate(
-                        {
-                            _id: mongoose.Types.ObjectId(doc._id)
-                        },
-                        {
-                            $addToSet: {
-                                peopleGoing: {
-                                    nickname: req.decodedAuth.nickname,
-                                    name: req.decodedAuth.name
-                                }
-                            }
-                        }, 
-                        (err, raw) => {
-                            if (err) {
-                                return res.status(500).json({message: 'Internal server error!'});
-                            } else {
-                                return res.json({message: 'Succesfully subscribed!'});
-                            }
+                Place.findByIdAndUpdate(
+                {
+                    _id: mongoose.Types.ObjectId(doc._id)
+                },
+                {
+                    $addToSet: {
+                        peopleGoing: {
+                            nickname: req.decodedAuth.nickname,
+                            name: req.decodedAuth.name
                         }
-                    );
-                }
+                    }
+                }, 
+                (err, raw) => {
+                    if (err) {
+                        return res.status(500).json({message: 'Internal server error!'});
+                    } else {
+                        return res.json({message: 'Succesfully subscribed!'});
+                    }
+                });
             }
         }
      );

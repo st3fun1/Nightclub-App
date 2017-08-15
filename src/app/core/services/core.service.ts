@@ -59,7 +59,6 @@ export class CoreService {
     let cityName = '';
     this.ipService.getLocation()
         .flatMap( (data) => {
-          console.log('data: ', data);
           cityName = data.city;
           return this.publicGetClubs(cityName);
         }).subscribe( 
