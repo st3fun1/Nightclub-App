@@ -1,49 +1,52 @@
 <header class="container-fluid">
     <div class="row justify-content-end">
-        <button class="col-1 btn btn-primary" *ngIf="!authenticated; else logoutBtn" type="button" (click)="login($event)">Login</button>
+        <button class="col-1 btn btn-primary login-btn btn-sm" *ngIf="!authenticated; else logoutBtn" type="button" (click)="login($event)">Login</button>
         <ng-template #logoutBtn>
-            <button  class="col-1 btn btn-primary" type="button" (click)="logout($event)">Logout</button>
+            <button  class="col-1 btn btn-primary login-btn btn-sm" type="button" (click)="logout($event)">Logout</button>
         </ng-template>
     </div>
+    <div class="container-fluid headings">
+        <div class="row justify-content-center">
+            <h1 class="col-12 col-md-6 text-center main-header">To get drunk or to get drunker?</h1>
+        </div>
+        <div class="row justify-content-center">
+            <h2 class="col-10 col-md-8 text-center">
+                    <i fa
+                        [name]="'smile-o'"
+                        [size]="1">
+                    </i>
+                    <i fa
+                        [name]="'glass'"
+                        [size]="1">
+                    </i>
+                    <i fa
+                        [name]="'users'"
+                        [size]="1">
+                    </i>
+            </h2>
+        </div>
+        <div class="row justify-content-center">
+            <p class="col-8 col-md-4 text-center description">
+                See which bars are hoppin'tonight.
+                Remember: take a cab and drink responsibly
+            </p>
+        </div>
+    </div>
 </header>
-<div class="container-fluid main">
-    <div class="row justify-content-center">
-        <h1 class="col-12 col-md-6 text-center main-header">To get drunk or to get drunker?</h1>
-    </div>
-    <div class="row justify-content-center">
-        <h2 class="col-10 col-md-8">
-             <div class="row justify-content-center">
-                 <i fa class="col-3 col-md-1 col-xl-1"
-                    [name]="'glass'"
-                    [size]="1">
-                 </i>
-                 <i fa class="col-3 col-md-1 col-xl-1"
-                    [name]="'users'"
-                    [size]="1">
-                 </i>
-                 <i fa class="col-3 col-md-1 col-xl-1"
-                    [name]="'smile-o'"
-                    [size]="1">
-                 </i>
-             </div>
-         </h2>
-    </div>
-    <div class="row justify-content-center">
-        <p class="col-8 col-md-4 text-center description">
-            See which bars are hoppin'tonight and RSVP ahead of time!
-            Remember: take a cab and drink responsibly
-        </p>
-    </div>
-</div>
 <app-search (getList)="getList($event)" [inputVal]="defaultInputVal">
 
 </app-search>
-<ul *ngIf="places && places.length">
-    <li *ngFor="let place of places">
-        {{place.name}} | Going: {{place.peopleGoing}} {{ '|' | showText : authenticated}}
-        <button type="button" *ngIf="authenticated" (click)="changeState(place)">
-            {{ place.currentUserGoing ? 'Going' : 'Not going'}}
-        </button>
-    </li>
-</ul>
+<app-club-list [places]="places"></app-club-list>
+<main>
 <router-outlet></router-outlet>
+</main>
+
+<footer class="container-fluid main-footer">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <p class="text-center">
+                &copy; Copyright {{currentYear}} - Stefan. All rights reserved.
+            </p>
+        </div>
+    </div>
+</footer>

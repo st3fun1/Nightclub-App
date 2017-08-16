@@ -1,2 +1,8 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
-@import "~font-awesome/css/font-awesome.css";
+@import url("https://fonts.googleapis.com/css?family=Just+Another+Hand");
+
+html, body {
+    font-size: 16px;
+    color: white;
+    background: purple;
+}

@@ -1,0 +1,7 @@
+  <div class="icon">
+    <img [src]="place.icon" [alt]="place.name" />
+  </div>
+  {{place.name}} | Going: {{place.peopleGoing}} {{ '|' | showText : authenticated}}
+  <button type="button" *ngIf="authenticated" (click)="changeState(place)">
+      {{ place.currentUserGoing ? 'Going' : 'Not going'}}
+  </button>

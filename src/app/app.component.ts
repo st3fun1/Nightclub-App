@@ -14,6 +14,7 @@ import { IpService } from './core/services/ip.service';
 export class AppComponent {
 
   places = [];
+  currentYear = new Date().getFullYear();
   authenticated = this.authService.authenticated;
   locationData = null;
   defaultInputVal = '';

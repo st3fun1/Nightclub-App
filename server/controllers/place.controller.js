@@ -3,6 +3,14 @@ const MainFactory = require('../factories/factory');
 const jwtDecode = require('jwt-decode');
 const mongoose = require('mongoose');
 
+// TODO:
+/**
+ * FEATURES: 
+ *     - popular clubs listing in user's area
+ *     - chat for each club - using web socket
+ *     - notifications when users subscribe or not
+ *     - reset subscribtions after event ends
+ */
 exports.findAllPlacesWithGivenArr = function(req, res) {
      if (req.body && req.body.cityName) {
         MainFactory.GooglePlaces.getClubsList(req.body.cityName, (err, body) => {

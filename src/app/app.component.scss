@@ -1,3 +1,30 @@
-.main {
-    margin-top: 60px;
+@import "shared/styles/typography";
+
+
+.headings {
+    p {
+        font-size: 1.5rem;
+        font-family: $headers-fonts;
+    }
+
+    i {
+        font-size: 35px;
+    }
+}
+
+.main-footer {
+    margin-top: 40px;
+}
+
+
+.headings {
+    margin-top: 40px;
+}
+
+.login-btn {
+    background: inherit;
+    color: white;
+    border-color: white;
+    margin-right: 20px;
+    margin-top: 20px;
 }

@@ -20,6 +20,8 @@ import { ShowTextPipe } from './shared/pipes/showText.pipe';
 import { authHttpServiceFactory } from './core/services/authHttpServiceFactory';
 import { TextValidator} from './shared/directives/textValidator.directive';
 import { IpService } from './core/services/ip.service';
+import { ClubListComponent } from './components/club-list/club-list.component';
+import { ClubComponent } from './components/club-list/components/club/club.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { IpService } from './core/services/ip.service';
     CallbackComponent,
     ShowTextPipe,
     TextValidator,
-    SearchComponent
+    SearchComponent,
+    ClubListComponent,
+    ClubComponent
   ],
   imports: [
     RouterModule.forRoot(ROUTES),
