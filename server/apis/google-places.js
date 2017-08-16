@@ -11,6 +11,7 @@ module.exports = class GooglePlaces {
         this.setNewReqURI(cityName);
 
         request(this.reqURI, (err, resp, body) => {
+            console.log("err, res, body", err, body);
             if (err) { 
                 if (cb && typeof cb === 'function') {
                     return cb(err, null);
