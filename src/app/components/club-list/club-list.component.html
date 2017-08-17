@@ -1,6 +1,4 @@
-<div class="container-fluid">
-  <div class="row justify-content-between">
-        <app-club class="col-2" *ngFor="let place of pPlaces" [place]="place">
-        </app-club>
-  </div>
+<div class="row justify-content-center"  *ngFor="let place of pPlaces; let i = index;">
+    <app-club class="col-12 col-md-10 club" [@grow]="place.state" [place]="place" (mouseover)="place.state = 'active'" (mouseout)="place.state = 'inactive'">
+    </app-club>
 </div>

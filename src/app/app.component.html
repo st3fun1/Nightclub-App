@@ -1,52 +1,66 @@
-<header class="container-fluid">
-    <div class="row justify-content-end">
-        <button class="col-1 btn btn-primary login-btn btn-sm" *ngIf="!authenticated; else logoutBtn" type="button" (click)="login($event)">Login</button>
-        <ng-template #logoutBtn>
-            <button  class="col-1 btn btn-primary login-btn btn-sm" type="button" (click)="logout($event)">Logout</button>
-        </ng-template>
+<div class="container-fluid">
+    <div class="row justify-content-center main-div">
+        <div class="col-10">
+            <div class="row justify-content-end">
+                <button (mouseover)="mouseoverLogin($event)" [@rotateProne]="animateLogin" class="btn btn-primary login-btn btn-sm" *ngIf="!authenticated; else logoutBtn" type="button" (click)="login($event)">Login</button>
+                <ng-template #logoutBtn>
+                    <button (mouseover)="mouseoverLogin($event)" [@rotateStraight]="animateLogin"  class="btn btn-primary login-btn btn-sm" type="button" (click)="logout($event)">Logout</button>
+                </ng-template>
+            </div>
+            <div class="row headings justify-content-center text-center">
+                <h1 class="col-10">To get drunk or to get drunker?</h1>
+                <h2 class="col-8">
+                        <i fa
+                            [name]="'smile-o'" [@shake]="animateFace"
+                            [size]="1">
+                        </i>
+                        <i fa [@rotateProne]="animateGlass" (mouseover)="mouseoverGlass($event)"
+                            [name]="'glass'"
+                            [size]="1">
+                        </i>
+                        <i fa
+                            [name]="'users'"
+                            [size]="1">
+                        </i>
+                </h2>  
+            </div>
+            <div class="row justify-content-center headings">
+                <p class="col-8 col-md-6 text-center description">
+                        See which bars are hoppin'tonight.
+                        Remember: take a cab and drink responsibly
+                </p>
+            </div>
+        </div>
+        <div class="col-10">
+            <app-search
+                class="col-12"
+                (getList)="getList($event)" 
+                [inputVal]="defaultInputVal"
+                (requestWasMade)="onRequest($event)">
+            </app-search>
+            <div class="row justify-content-center">
+                <div class="col-12 text-center" *ngIf="contentLoading">
+                    <i fa [name]="'spinner'" [spin]="true"></i>
+                </div>
+                <app-club-list
+                    class="col-12"
+                    [places]="places">
+                </app-club-list>
+            </div>
+            <div class="row">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+        <div class="col-8 align-self-end">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <p class="text-center">
+                        <small>
+                                &copy; Copyright {{currentYear}} - Stefan. All rights reserved.
+                        </small>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="container-fluid headings">
-        <div class="row justify-content-center">
-            <h1 class="col-12 col-md-6 text-center main-header">To get drunk or to get drunker?</h1>
-        </div>
-        <div class="row justify-content-center">
-            <h2 class="col-10 col-md-8 text-center">
-                    <i fa
-                        [name]="'smile-o'"
-                        [size]="1">
-                    </i>
-                    <i fa
-                        [name]="'glass'"
-                        [size]="1">
-                    </i>
-                    <i fa
-                        [name]="'users'"
-                        [size]="1">
-                    </i>
-            </h2>
-        </div>
-        <div class="row justify-content-center">
-            <p class="col-8 col-md-4 text-center description">
-                See which bars are hoppin'tonight.
-                Remember: take a cab and drink responsibly
-            </p>
-        </div>
-    </div>
-</header>
-<app-search (getList)="getList($event)" [inputVal]="defaultInputVal">
-
-</app-search>
-<app-club-list [places]="places"></app-club-list>
-<main>
-<router-outlet></router-outlet>
-</main>
-
-<footer class="container-fluid main-footer">
-    <div class="row justify-content-center">
-        <div class="col-12">
-            <p class="text-center">
-                &copy; Copyright {{currentYear}} - Stefan. All rights reserved.
-            </p>
-        </div>
-    </div>
-</footer>
+</div>

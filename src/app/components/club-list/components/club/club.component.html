@@ -1,7 +1,24 @@
-  <div class="icon">
-    <img [src]="place.icon" [alt]="place.name" />
-  </div>
-  {{place.name}} | Going: {{place.peopleGoing}} {{ '|' | showText : authenticated}}
-  <button type="button" *ngIf="authenticated" (click)="changeState(place)">
-      {{ place.currentUserGoing ? 'Going' : 'Not going'}}
-  </button>
+<div class="row">
+    <div *ngIf="_place; else loading" class="col-12">
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <img  class="img-responsive img-thumbnail" *ngIf="_place.src; else icon" [src]="_place.src" [alt]="_place?.name" />
+                <ng-template #icon>
+                    <img  class="img-responsive img-thumbnail"  [src]="_place.icon" [alt]="_place?.name" />
+                </ng-template>
+            </div>
+            <div class="col-12 col-md-8">
+                <p><span>Address: </span>{{_place.address}}</p>
+                <p><span>People going: </span>{{_place.name | uppercase}} | Going: {{_place.peopleGoing}} {{ '|' | showText : authenticated}}</p>
+                <button class="btn btn-primary btn-block btn-large" type="button" *ngIf="authenticated" (click)="changeState(_place)">
+                    {{ _place?.currentUserGoing ? 'Unsubscribe' : 'Subscribe'}}
+                </button>
+            </div>
+        </div>
+    </div>
+    <ng-template #loading>
+        <div class="col-12">
+            <i fa [spin]="true" [name]="spinner"></i>Please wait, fetching data from server...
+        </div>
+    </ng-template>
+</div>
