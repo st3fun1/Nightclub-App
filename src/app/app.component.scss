@@ -2,7 +2,7 @@
 
 
 .headings {
-    p {
+    > p {
         font-size: 1.5rem;
         font-family: $headers-fonts;
     }
@@ -27,4 +27,13 @@
     border-color: white;
     margin-right: 20px;
     margin-top: 20px;
+}
+
+.main-row {
+    -webkit-flex-direction: column;  /* Safari */
+    flex-direction: column;
+}
+
+.main-div{
+    height: 100vh;
 }

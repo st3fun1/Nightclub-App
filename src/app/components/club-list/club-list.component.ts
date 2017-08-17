@@ -1,14 +1,36 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChildren, QueryList } from '@angular/core';
 import { CoreService } from '../../core/services/core.service';
 import { AuthService } from '../../core/services/auth.service';
+import { trigger, transition, style, animate, state} from '@angular/animations';
+import { ClubComponent } from './components/club/club.component';
 
 @Component({
   selector: 'app-club-list',
   templateUrl: './club-list.component.html',
-  styleUrls: ['./club-list.component.scss']
+  styleUrls: ['./club-list.component.scss'],
+  animations: [
+    trigger('grow', [
+      state('inactive', style({
+        background: 'inherit',
+        transform: 'scale(1)',
+        zIndex: '1',
+        cursor: 'initial'
+      })),
+      state('active', style({
+        background: 'black',
+        transform:'scale(1.04)',
+        zIndex: '9999',
+        cursor: 'pointer'
+      })),
+      transition('inactive => active', animate('100ms ease-in')),
+      transition('active => inactive', animate('100ms ease-out'))
+    ])
+  ],
 })
 export class ClubListComponent implements OnInit, OnChanges {
   @Input() places;
+  @ViewChildren(ClubComponent) clubs: QueryList<ClubComponent>;
+
   pPlaces;
   authenticated = this.authService.authenticated;
   constructor(
@@ -71,10 +93,14 @@ export class ClubListComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('places: ', changes['places'].currentValue);
      if (changes['places'] && !changes['places'].firstChange) {
        this.pPlaces = changes['places'].currentValue;
      }
+  }
+
+  ngAfterViewInit() {
+    let clubs: ClubComponent[] = this.clubs.toArray();
+    console.log("clubs: ", clubs, this.clubs);
   }
 
 }

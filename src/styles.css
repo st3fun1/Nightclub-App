@@ -6,3 +6,9 @@ html, body {
     color: white;
     background: purple;
 }
+
+html.rotate-me {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transition: 0.6s all ease;
+}

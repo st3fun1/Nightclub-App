@@ -7,6 +7,7 @@ import { Http, RequestOptions } from '@angular/http';
 
 import { AuthHttp} from 'angular2-jwt';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -22,6 +23,7 @@ import { TextValidator} from './shared/directives/textValidator.directive';
 import { IpService } from './core/services/ip.service';
 import { ClubListComponent } from './components/club-list/club-list.component';
 import { ClubComponent } from './components/club-list/components/club/club.component';
+import { GooglePlacesService } from './core/services/google-places.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { ClubComponent } from './components/club-list/components/club/club.compo
     BrowserModule,
     FormsModule,
     CoreModule,
-    Angular2FontawesomeModule
+    Angular2FontawesomeModule,
+    BrowserAnimationsModule
   ],
   providers: [
     AuthService,
@@ -48,7 +51,8 @@ import { ClubComponent } from './components/club-list/components/club/club.compo
       useFactory: authHttpServiceFactory,
       deps: [Http, RequestOptions]
     },
-    IpService
+    IpService,
+    GooglePlacesService
   ],
   bootstrap: [AppComponent]
 })

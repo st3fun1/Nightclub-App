@@ -14,6 +14,7 @@ const dburi = 'mongodb://127.0.0.1:27017/nightclub';
 const MainFactory = require('./server/factories/factory');
 const authMiddleware = require('./server/middlewares/auth.middleware');
 const PlaceRouter = require('./server/routes/place.route')();
+const GooglePlacesRouter = require('./server/routes/google-places.route')();
 
 let promise = mongoose.connect(dburi, {
     useMongoClient: true
@@ -35,17 +36,18 @@ var authCheck = jwt({
 });
 
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, '/dist')));
+app.use('/images',express.static(path.join(__dirname, '/server/apis/images')));
 app.use(authMiddleware);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use('/api', PlaceRouter);
+app.use('/externalApi/', GooglePlacesRouter);
 
 app.get('*', (req, res) => {
-    return res.sendFile(path.join(__dirname, 'dist/index.html') || '');
+    return res.sendFile(path.join(__dirname, '/dist/index.html') || '');
 });
-
 
 const server = http.createServer(app);
 

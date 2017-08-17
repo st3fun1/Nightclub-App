@@ -6,12 +6,11 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class GooglePlacesService {
-    private googlePlacesURL = 'https://maps.googleapis.com/maps/api/place/photo?';
-    private apiKey = GlobalConfig.googlePlacesAPIKey;
+    private getPhotoURL = GlobalConfig.serverURL + '/externalApi/public/photo/';
     constructor(private http: Http) {}
 
-    getPhoto(ref, maxWidth) {
-        this.http.get(`${this.googlePlacesURL}maxwidth=${maxWidth}&photoreference=${ref}&key=${this.apiKey}`)
+    getPhoto(ref: string, clubName: string, maxWidth: number = 400) {
+        return this.http.get(`${this.getPhotoURL}${clubName}?maxwidth=${maxWidth || 400}&ref=${ref}`)
             .map( (response: Response) => response.json())
             .catch( (error: any) => Observable.throw(error));
     }
